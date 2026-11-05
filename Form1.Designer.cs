@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             Btn_Exit = new Button();
             pictureBox1 = new PictureBox();
-            label5 = new Label();
             Lbl_Valore = new Label();
             RadioB1_0 = new RadioButton();
             panel1 = new Panel();
@@ -96,6 +95,12 @@
             label25 = new Label();
             RadioB2_0 = new RadioButton();
             groupBox4Banda = new GroupBox();
+            panel27 = new Panel();
+            RadioB_Molt_9 = new RadioButton();
+            label32 = new Label();
+            panel22 = new Panel();
+            RadioB_Molt_8 = new RadioButton();
+            label27 = new Label();
             panel21 = new Panel();
             label26 = new Label();
             RadioB_Molt_4 = new RadioButton();
@@ -182,6 +187,8 @@
             label49 = new Label();
             RadioB3_0 = new RadioButton();
             PanelBandaMolt = new Panel();
+            pictureBox2 = new PictureBox();
+            Btn_Reset = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -206,6 +213,8 @@
             panel19.SuspendLayout();
             panel20.SuspendLayout();
             groupBox4Banda.SuspendLayout();
+            panel27.SuspendLayout();
+            panel22.SuspendLayout();
             panel21.SuspendLayout();
             panel23.SuspendLayout();
             panel24.SuspendLayout();
@@ -234,13 +243,14 @@
             panel46.SuspendLayout();
             panel47.SuspendLayout();
             panel48.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // Btn_Exit
             // 
-            Btn_Exit.Location = new Point(484, 486);
+            Btn_Exit.Location = new Point(605, 122);
             Btn_Exit.Name = "Btn_Exit";
-            Btn_Exit.Size = new Size(75, 23);
+            Btn_Exit.Size = new Size(136, 23);
             Btn_Exit.TabIndex = 0;
             Btn_Exit.Text = "Esci";
             Btn_Exit.UseVisualStyleBackColor = true;
@@ -249,42 +259,30 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(193, 12);
+            pictureBox1.Location = new Point(208, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(385, 133);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 15F);
-            label5.Location = new Point(206, 159);
-            label5.Name = "label5";
-            label5.Size = new Size(71, 28);
-            label5.TabIndex = 11;
-            label5.Text = "Valore:";
-            // 
             // Lbl_Valore
             // 
             Lbl_Valore.AutoSize = true;
             Lbl_Valore.Font = new Font("Segoe UI", 15F);
-            Lbl_Valore.Location = new Point(274, 159);
+            Lbl_Valore.Location = new Point(16, 155);
             Lbl_Valore.Name = "Lbl_Valore";
-            Lbl_Valore.Size = new Size(116, 28);
+            Lbl_Valore.Size = new Size(71, 28);
             Lbl_Valore.TabIndex = 12;
-            Lbl_Valore.Text = "_____________";
+            Lbl_Valore.Text = "Valore:";
             // 
             // RadioB1_0
             // 
             RadioB1_0.AutoSize = true;
-            RadioB1_0.Checked = true;
             RadioB1_0.Location = new Point(4, 6);
             RadioB1_0.Name = "RadioB1_0";
             RadioB1_0.Size = new Size(14, 13);
             RadioB1_0.TabIndex = 13;
-            RadioB1_0.TabStop = true;
             RadioB1_0.UseVisualStyleBackColor = true;
             RadioB1_0.Click += RadioB1_0_Click;
             // 
@@ -952,18 +950,18 @@
             // RadioB2_0
             // 
             RadioB2_0.AutoSize = true;
-            RadioB2_0.Checked = true;
             RadioB2_0.Location = new Point(4, 6);
             RadioB2_0.Name = "RadioB2_0";
             RadioB2_0.Size = new Size(14, 13);
             RadioB2_0.TabIndex = 13;
-            RadioB2_0.TabStop = true;
             RadioB2_0.UseVisualStyleBackColor = true;
             RadioB2_0.Click += RadioB2_0_Click;
             // 
             // groupBox4Banda
             // 
             groupBox4Banda.BackgroundImageLayout = ImageLayout.None;
+            groupBox4Banda.Controls.Add(panel27);
+            groupBox4Banda.Controls.Add(panel22);
             groupBox4Banda.Controls.Add(panel21);
             groupBox4Banda.Controls.Add(panel23);
             groupBox4Banda.Controls.Add(panel24);
@@ -973,12 +971,78 @@
             groupBox4Banda.Controls.Add(panel29);
             groupBox4Banda.Controls.Add(panel30);
             groupBox4Banda.FlatStyle = FlatStyle.Flat;
-            groupBox4Banda.Location = new Point(460, 201);
+            groupBox4Banda.Location = new Point(457, 200);
             groupBox4Banda.Name = "groupBox4Banda";
-            groupBox4Banda.Size = new Size(131, 266);
+            groupBox4Banda.Size = new Size(131, 324);
             groupBox4Banda.TabIndex = 19;
             groupBox4Banda.TabStop = false;
             groupBox4Banda.Text = "4 MOLTIPLICATORE";
+            // 
+            // panel27
+            // 
+            panel27.BackColor = Color.Silver;
+            panel27.Controls.Add(RadioB_Molt_9);
+            panel27.Controls.Add(label32);
+            panel27.Location = new Point(8, 294);
+            panel27.Name = "panel27";
+            panel27.Size = new Size(111, 24);
+            panel27.TabIndex = 18;
+            // 
+            // RadioB_Molt_9
+            // 
+            RadioB_Molt_9.AutoSize = true;
+            RadioB_Molt_9.Location = new Point(4, 6);
+            RadioB_Molt_9.Name = "RadioB_Molt_9";
+            RadioB_Molt_9.Size = new Size(14, 13);
+            RadioB_Molt_9.TabIndex = 13;
+            RadioB_Molt_9.TabStop = true;
+            RadioB_Molt_9.UseVisualStyleBackColor = true;
+            RadioB_Molt_9.Click += RadioB_Molt_9_Click;
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.BackColor = Color.Silver;
+            label32.Enabled = false;
+            label32.ForeColor = Color.Black;
+            label32.Location = new Point(24, 5);
+            label32.Name = "label32";
+            label32.Size = new Size(86, 15);
+            label32.TabIndex = 15;
+            label32.Text = "Argento   x0.01";
+            // 
+            // panel22
+            // 
+            panel22.BackColor = Color.Gold;
+            panel22.Controls.Add(RadioB_Molt_8);
+            panel22.Controls.Add(label27);
+            panel22.Location = new Point(8, 265);
+            panel22.Name = "panel22";
+            panel22.Size = new Size(111, 24);
+            panel22.TabIndex = 17;
+            // 
+            // RadioB_Molt_8
+            // 
+            RadioB_Molt_8.AutoSize = true;
+            RadioB_Molt_8.Location = new Point(4, 6);
+            RadioB_Molt_8.Name = "RadioB_Molt_8";
+            RadioB_Molt_8.Size = new Size(14, 13);
+            RadioB_Molt_8.TabIndex = 13;
+            RadioB_Molt_8.TabStop = true;
+            RadioB_Molt_8.UseVisualStyleBackColor = true;
+            RadioB_Molt_8.Click += RadioB_Molt_8_Click;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.BackColor = Color.Gold;
+            label27.Enabled = false;
+            label27.ForeColor = Color.Black;
+            label27.Location = new Point(24, 5);
+            label27.Name = "label27";
+            label27.Size = new Size(84, 15);
+            label27.TabIndex = 15;
+            label27.Text = "Oro            x0.1";
             // 
             // panel21
             // 
@@ -1010,6 +1074,7 @@
             RadioB_Molt_4.TabIndex = 13;
             RadioB_Molt_4.TabStop = true;
             RadioB_Molt_4.UseVisualStyleBackColor = true;
+            RadioB_Molt_4.Click += RadioB_Molt_4_Click;
             // 
             // panel23
             // 
@@ -1041,6 +1106,7 @@
             RadioB_Molt_3.TabIndex = 13;
             RadioB_Molt_3.TabStop = true;
             RadioB_Molt_3.UseVisualStyleBackColor = true;
+            RadioB_Molt_3.Click += RadioB_Molt_3_Click;
             // 
             // panel24
             // 
@@ -1072,6 +1138,7 @@
             RadioB_Molt_1.TabIndex = 13;
             RadioB_Molt_1.TabStop = true;
             RadioB_Molt_1.UseVisualStyleBackColor = true;
+            RadioB_Molt_1.Click += RadioB_Molt_1_Click;
             // 
             // panel25
             // 
@@ -1103,6 +1170,7 @@
             RadioB_Molt_2.TabIndex = 13;
             RadioB_Molt_2.TabStop = true;
             RadioB_Molt_2.UseVisualStyleBackColor = true;
+            RadioB_Molt_2.Click += RadioB_Molt_2_Click;
             // 
             // panel26
             // 
@@ -1134,6 +1202,7 @@
             RadioB_Molt_7.TabIndex = 13;
             RadioB_Molt_7.TabStop = true;
             RadioB_Molt_7.UseVisualStyleBackColor = true;
+            RadioB_Molt_7.Click += RadioB_Molt_7_Click;
             // 
             // panel28
             // 
@@ -1165,6 +1234,7 @@
             RadioB_Molt_6.TabIndex = 13;
             RadioB_Molt_6.TabStop = true;
             RadioB_Molt_6.UseVisualStyleBackColor = true;
+            RadioB_Molt_6.Click += RadioB_Molt_6_Click;
             // 
             // panel29
             // 
@@ -1196,6 +1266,7 @@
             RadioB_Molt_5.TabIndex = 13;
             RadioB_Molt_5.TabStop = true;
             RadioB_Molt_5.UseVisualStyleBackColor = true;
+            RadioB_Molt_5.Click += RadioB_Molt_5_Click;
             // 
             // panel30
             // 
@@ -1221,13 +1292,12 @@
             // RadioB_Molt_0
             // 
             RadioB_Molt_0.AutoSize = true;
-            RadioB_Molt_0.Checked = true;
             RadioB_Molt_0.Location = new Point(4, 6);
             RadioB_Molt_0.Name = "RadioB_Molt_0";
             RadioB_Molt_0.Size = new Size(14, 13);
             RadioB_Molt_0.TabIndex = 13;
-            RadioB_Molt_0.TabStop = true;
             RadioB_Molt_0.UseVisualStyleBackColor = true;
+            RadioB_Molt_0.Click += RadioB_Molt_0_Click;
             // 
             // groupBoxToll
             // 
@@ -1241,7 +1311,7 @@
             groupBoxToll.Controls.Add(panel38);
             groupBoxToll.Controls.Add(panel39);
             groupBoxToll.FlatStyle = FlatStyle.Flat;
-            groupBoxToll.Location = new Point(610, 199);
+            groupBoxToll.Location = new Point(605, 199);
             groupBoxToll.Name = "groupBoxToll";
             groupBoxToll.Size = new Size(131, 268);
             groupBoxToll.TabIndex = 20;
@@ -1338,12 +1408,10 @@
             // RadioB_Toll_0
             // 
             RadioB_Toll_0.AutoSize = true;
-            RadioB_Toll_0.Checked = true;
             RadioB_Toll_0.Location = new Point(4, 6);
             RadioB_Toll_0.Name = "RadioB_Toll_0";
             RadioB_Toll_0.Size = new Size(14, 13);
             RadioB_Toll_0.TabIndex = 13;
-            RadioB_Toll_0.TabStop = true;
             RadioB_Toll_0.UseVisualStyleBackColor = true;
             RadioB_Toll_0.Click += RadioB_Toll_0_Click;
             // 
@@ -1510,40 +1578,40 @@
             // PanelBanda1
             // 
             PanelBanda1.ForeColor = SystemColors.ControlText;
-            PanelBanda1.Location = new Point(259, 58);
+            PanelBanda1.Location = new Point(274, 59);
             PanelBanda1.Name = "PanelBanda1";
-            PanelBanda1.Size = new Size(19, 73);
+            PanelBanda1.Size = new Size(22, 72);
             PanelBanda1.TabIndex = 21;
             // 
             // PanelBanda2
             // 
             PanelBanda2.ForeColor = SystemColors.ControlText;
-            PanelBanda2.Location = new Point(307, 68);
+            PanelBanda2.Location = new Point(322, 69);
             PanelBanda2.Name = "PanelBanda2";
-            PanelBanda2.Size = new Size(14, 53);
+            PanelBanda2.Size = new Size(14, 52);
             PanelBanda2.TabIndex = 22;
             // 
             // PanelBanda3
             // 
             PanelBanda3.ForeColor = SystemColors.ControlText;
-            PanelBanda3.Location = new Point(346, 68);
+            PanelBanda3.Location = new Point(361, 69);
             PanelBanda3.Name = "PanelBanda3";
-            PanelBanda3.Size = new Size(14, 53);
+            PanelBanda3.Size = new Size(14, 52);
             PanelBanda3.TabIndex = 23;
             // 
             // PanelBandaToll
             // 
             PanelBandaToll.ForeColor = SystemColors.ControlText;
-            PanelBandaToll.Location = new Point(505, 58);
+            PanelBandaToll.Location = new Point(520, 59);
             PanelBandaToll.Name = "PanelBandaToll";
-            PanelBandaToll.Size = new Size(19, 73);
+            PanelBandaToll.Size = new Size(20, 72);
             PanelBandaToll.TabIndex = 24;
             // 
             // About
             // 
-            About.Location = new Point(632, 486);
+            About.Location = new Point(605, 485);
             About.Name = "About";
-            About.Size = new Size(75, 23);
+            About.Size = new Size(136, 23);
             About.TabIndex = 25;
             About.Text = "About";
             About.UseVisualStyleBackColor = true;
@@ -1563,7 +1631,7 @@
             groupBox3Banda.Controls.Add(panel47);
             groupBox3Banda.Controls.Add(panel48);
             groupBox3Banda.FlatStyle = FlatStyle.Flat;
-            groupBox3Banda.Location = new Point(312, 199);
+            groupBox3Banda.Location = new Point(309, 199);
             groupBox3Banda.Name = "groupBox3Banda";
             groupBox3Banda.Size = new Size(131, 326);
             groupBox3Banda.TabIndex = 26;
@@ -1893,16 +1961,38 @@
             // PanelBandaMolt
             // 
             PanelBandaMolt.ForeColor = SystemColors.ControlText;
-            PanelBandaMolt.Location = new Point(389, 68);
+            PanelBandaMolt.Location = new Point(404, 69);
             PanelBandaMolt.Name = "PanelBandaMolt";
-            PanelBandaMolt.Size = new Size(14, 53);
+            PanelBandaMolt.Size = new Size(14, 52);
             PanelBandaMolt.TabIndex = 27;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.ZuccaLogo;
+            pictureBox2.Location = new Point(14, 27);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(175, 99);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 28;
+            pictureBox2.TabStop = false;
+            // 
+            // Btn_Reset
+            // 
+            Btn_Reset.Location = new Point(605, 50);
+            Btn_Reset.Name = "Btn_Reset";
+            Btn_Reset.Size = new Size(136, 23);
+            Btn_Reset.TabIndex = 29;
+            Btn_Reset.Text = "Reset";
+            Btn_Reset.UseVisualStyleBackColor = true;
+            Btn_Reset.Click += Btn_Reset_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(753, 528);
+            Controls.Add(Btn_Reset);
+            Controls.Add(pictureBox2);
             Controls.Add(PanelBandaMolt);
             Controls.Add(groupBox3Banda);
             Controls.Add(About);
@@ -1914,7 +2004,6 @@
             Controls.Add(groupBox4Banda);
             Controls.Add(groupBox2Banda);
             Controls.Add(Lbl_Valore);
-            Controls.Add(label5);
             Controls.Add(pictureBox1);
             Controls.Add(Btn_Exit);
             Controls.Add(groupBox1Banda);
@@ -1968,6 +2057,10 @@
             panel20.ResumeLayout(false);
             panel20.PerformLayout();
             groupBox4Banda.ResumeLayout(false);
+            panel27.ResumeLayout(false);
+            panel27.PerformLayout();
+            panel22.ResumeLayout(false);
+            panel22.PerformLayout();
             panel21.ResumeLayout(false);
             panel21.PerformLayout();
             panel23.ResumeLayout(false);
@@ -2022,6 +2115,7 @@
             panel47.PerformLayout();
             panel48.ResumeLayout(false);
             panel48.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2030,7 +2124,6 @@
 
         private Button Btn_Exit;
         private PictureBox pictureBox1;
-        private Label label5;
         private Label Lbl_Valore;
         private RadioButton RadioB1_0;
         private Panel panel1;
@@ -2181,5 +2274,13 @@
         private RadioButton RadioB3_0;
         private Panel PanelBandaMolt;
         private GroupBox groupBox4Banda;
+        private PictureBox pictureBox2;
+        private Panel panel27;
+        private RadioButton RadioB_Molt_9;
+        private Label label32;
+        private Panel panel22;
+        private RadioButton RadioB_Molt_8;
+        private Label label27;
+        private Button Btn_Reset;
     }
 }

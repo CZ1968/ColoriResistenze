@@ -19,76 +19,82 @@ namespace ColoriResistenze
     {
         private float valoreResistenza = 0; // valore della resistenza calcolato
         private char ohmSign = '\u2126'; // Simbolo Ohm dedicato
-        private List<String> lstColonna1 = new List<String>(); // liste dei valori
-        private List<String> lstColonna2 = new List<String>();
-        private List<String> lstColonna3 = new List<String>();
-        private List<String> lstMoltiplicatore = new List<String>();
+        private List<float> lstColonna1 = new List<float>(); // liste dei valori
+        private List<float> lstColonna2 = new List<float>();
+        private List<float> lstColonna3 = new List<float>();
+        private List<float> lstMoltiplicatore = new List<float>();
 
         private List<String> lstTolleranze = new List<String>();
         private List<String> lstValoriImpostati = new List<String>();
 
         private List<Color> lstColoriBande_1_2_3 = new List<Color>();
+        private List<Color> lstColoriBandaMolt = new List<Color>();
         private List<Color> lstColoriBandaToll = new List<Color>();
+
         private List<RadioButton> lstRb1Banda;
         private List<RadioButton> lstRb2Banda;
         private List<RadioButton> lstRb3Banda;
         private List<RadioButton> lstRbBandaMolt;
         private List<RadioButton> lstRbTolleranze;
-        private int banda1Selezione = 0;
-        private int banda2Selezione = 0;
-        private int banda3Selezione = 0;
-        private int bandaMolt = 0;
-        private int bandaTollSelezione = 0;
-        private bool debug = false;
+
+        private string intestazionelabel = "Valore: ";
+
+        private float bandaMolt = 10.0f;
+        private float bandaTollSelezione = 8.0f;
+        private int banda1Selezione = 10;
+        private int banda2Selezione = 10;
+        private int banda3Selezione = 10;
 
         public Form1()
         {
             InitializeComponent();
             RiempiListe();                     // Riempie le liste con i valori
-            RienpiListeColoriBande();          // Riempie le liste con i colori
+            RienpiListeColoriBande_1_2_3();          // Riempie le liste con i colori
+            RienpiListaColoriMoltiplicatore();   // Riempie le liste con i colori del moltiplicatore
             RienpiListeColoriToll();         // Riempie le liste con i colori della tolleranza
-            Lbl_Valore.Text = "_____________"; //Inizializza la label del risultato
+
+            Lbl_Valore.Text = intestazionelabel; //Inizializza la label del risultato
+
             // Inizializza i colori delle bande tutte allo Zero
-            PanelBanda1.BackColor = lstColoriBande_1_2_3[0];
-            PanelBanda2.BackColor = lstColoriBande_1_2_3[0];
-            PanelBanda3.BackColor = lstColoriBande_1_2_3[0];
-            PanelBandaToll.BackColor = lstColoriBandaToll[0];
+            PanelBanda1.BackColor = lstColoriBande_1_2_3[10];
+            PanelBanda2.BackColor = lstColoriBande_1_2_3[10];
+            PanelBanda3.BackColor = lstColoriBande_1_2_3[10];
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[10];
+            PanelBandaToll.BackColor = lstColoriBandaToll[8];
+
             //List per i RadioButton
-            //
+
             //RadioButton della prima banda
             lstRb1Banda = new List<RadioButton>
             { RadioB1_0, RadioB1_1, RadioB1_2, RadioB1_3, RadioB1_4,
               RadioB1_5, RadioB1_6, RadioB1_7, RadioB1_8, RadioB1_9
             };
+
             // RadioButton della seconda banda
             lstRb2Banda = new List<RadioButton>
             { RadioB2_0, RadioB2_1, RadioB2_2, RadioB2_3, RadioB2_4,
               RadioB2_5, RadioB2_6, RadioB2_7, RadioB2_8, RadioB2_9
             };
+
             // RadioButton della terza banda
             lstRb3Banda = new List<RadioButton>
             { RadioB3_0, RadioB3_1, RadioB3_2, RadioB3_3, RadioB3_4,
               RadioB3_5, RadioB3_6, RadioB3_7, RadioB3_8, RadioB3_9
             };
+
             // RadioButton della quarta banda (moltiplicatore)
             lstRbBandaMolt = new List<RadioButton>
             { RadioB_Molt_0, RadioB_Molt_1, RadioB_Molt_2, RadioB_Molt_3, RadioB_Molt_4,
-              RadioB_Molt_5, RadioB_Molt_6, RadioB_Molt_7
+              RadioB_Molt_5, RadioB_Molt_6, RadioB_Molt_7,RadioB_Molt_8,RadioB_Molt_9
             };
+
             // RadioButton della quinta banda (tolleranza)
             lstRbTolleranze = new List<RadioButton>
             { RadioB_Toll_0, RadioB_Toll_1, RadioB_Toll_2, RadioB_Toll_3, RadioB_Toll_4,
               RadioB_Toll_5, RadioB_Toll_6, RadioB_Toll_7
             };
-            AggiornaLabelRisultato(); // Aggiorna la label del risultato all'avvio dell'applicazione
-        }
-
-        //***********************************************************
-        // Pulsante Esci
-        //***********************************************************
-        private void Btn_Exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            Reset();
+            // AggiornaLabelRisultato(); // Aggiorna la label del risultato all'avvio dell'applicazione
         }
 
         //***********************************************************
@@ -97,16 +103,17 @@ namespace ColoriResistenze
         private void RiempiListe()
         {
             // Prima Banda
-            lstColonna1.Add("0");
-            lstColonna1.Add("1");
-            lstColonna1.Add("2");
-            lstColonna1.Add("3");
-            lstColonna1.Add("4");
-            lstColonna1.Add("5");
-            lstColonna1.Add("6");
-            lstColonna1.Add("7");
-            lstColonna1.Add("8");
-            lstColonna1.Add("9");
+            lstColonna1.Add(0);
+            lstColonna1.Add(1);
+            lstColonna1.Add(2);
+            lstColonna1.Add(3);
+            lstColonna1.Add(4);
+            lstColonna1.Add(5);
+            lstColonna1.Add(6);
+            lstColonna1.Add(7);
+            lstColonna1.Add(8);
+            lstColonna1.Add(9);
+
             //Seconda banda uguale alla prima
             lstColonna2.AddRange(lstColonna1);
 
@@ -114,15 +121,16 @@ namespace ColoriResistenze
             lstColonna3.AddRange(lstColonna1);
 
             //Quarta banda MOLTIPLICATORE
-            lstMoltiplicatore.Add(" ");
-            lstMoltiplicatore.Add("0");
-            lstMoltiplicatore.Add("00");
-            lstMoltiplicatore.Add("000");      //K
-            lstMoltiplicatore.Add("0000");     //K
-            lstMoltiplicatore.Add("00000");    //K
-            lstMoltiplicatore.Add("000000");   //M
-            lstMoltiplicatore.Add("0000000");  //M
-            lstMoltiplicatore.Add("00000000"); //M
+            lstMoltiplicatore.Add(1);         //x1 ---> 1ohm
+            lstMoltiplicatore.Add(10);        //x10 ---> 10ohm
+            lstMoltiplicatore.Add(100);       //x100 ---> 100ohm
+            lstMoltiplicatore.Add(1000);      //x1000 ---> 1Kohm
+            lstMoltiplicatore.Add(10000);     //x10000 ---> 10Kohm
+            lstMoltiplicatore.Add(100000);    //x100000 ---> 100Kohm
+            lstMoltiplicatore.Add(1000000);   //x1000000 ---> 1Mohm
+            lstMoltiplicatore.Add(10000000);  //x10000000 ---> 10Mohm
+            lstMoltiplicatore.Add(0.1f);      //x0.1  --------> 10% di 1ohm
+            lstMoltiplicatore.Add(0.01f);     //x0.01 ---------> 1% di 1ohm
 
             //Quarta banda TOLLERANZA
             lstTolleranze.Add("+/- 1%");
@@ -138,38 +146,11 @@ namespace ColoriResistenze
         //***********************************************************
         // aggiorna la label del risultato in tempo reale
         //***********************************************************
-
         private void AggiornaLabelRisultato()
         {
-            if (banda1Selezione == 0)
+            if (banda1Selezione > 9)
             {
-                Lbl_Valore.Text = $"{lstColonna2[banda2Selezione]}{lstColonna3[banda3Selezione]}{ohmSign} - Toll. {lstTolleranze[bandaTollSelezione]}";
-            }
-            else
-            {
-                Lbl_Valore.Text = $"{lstColonna1[banda1Selezione]}{lstColonna2[banda2Selezione]}{lstColonna3[banda3Selezione]}{ohmSign} - Toll. {lstTolleranze[bandaTollSelezione]}";
-            }
-        }
-
-        //***********************************************************
-        // Esecuzione dei calcoli per RADIOBUTTON
-        //***********************************************************
-        private void ComponiValore_RadioButton()
-        {
-            if (debug)
-            {
-                MessageBox.Show($"BANDA 1: {banda1Selezione}\nBANDA 2: {banda2Selezione}\nBANDA 3: {banda3Selezione}\nTOLLERANZA: {bandaTollSelezione}");
-            }
-            else
-            {
-                if (banda1Selezione == 0)
-                {
-                    Lbl_Valore.Text = $"{lstColonna2[banda2Selezione]}{lstColonna3[banda3Selezione]}{ohmSign} - Toll. {lstTolleranze[bandaTollSelezione]}";
-                }
-                else
-                {
-                    Lbl_Valore.Text = $"{lstColonna1[banda1Selezione]}{lstColonna2[banda2Selezione]}{lstColonna3[banda3Selezione]}{ohmSign} - Toll. {lstTolleranze[bandaTollSelezione]}";
-                }
+                Lbl_Valore.Text = $"Valore: ";
             }
         }
 
@@ -277,7 +258,7 @@ namespace ColoriResistenze
         {
             RadioButtonSelezionato_2_Banda(0);
             banda2Selezione = 0;
-            PanelBanda2.BackColor = lstColoriBande_1_2_3[9];
+            PanelBanda2.BackColor = lstColoriBande_1_2_3[0];
             AggiornaLabelRisultato();
         }
 
@@ -460,12 +441,93 @@ namespace ColoriResistenze
         // INIZIO gestione radio button alla selezione e assegnazione valore MOLTIPLICATORE
         //*********************************************************************************
 
-        // RadioButton 0
+        // RadioButton MOLTIPLICATORE 0
         private void RadioB_Molt_0_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(0);
-            banda3Selezione = 0;
-            PanelBanda3.BackColor = lstColoriBande_1_2_3[0];
+            bandaMolt = 0;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[0];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 1
+        private void RadioB_Molt_1_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(1);
+            bandaMolt = 1;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[1];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 2
+        private void RadioB_Molt_2_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(2);
+            bandaMolt = 2;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[2];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 3
+        private void RadioB_Molt_3_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(3);
+            bandaMolt = 3;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[3];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 4
+        private void RadioB_Molt_4_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(4);
+            bandaMolt = 4;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[4];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 5
+        private void RadioB_Molt_5_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(5);
+            bandaMolt = 5;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[5];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 6
+        private void RadioB_Molt_6_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(6);
+            bandaMolt = 6;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[6];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 7
+        private void RadioB_Molt_7_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(7);
+            bandaMolt = 7;
+            PanelBandaMolt.BackColor = lstColoriBande_1_2_3[7];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 8
+        private void RadioB_Molt_8_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(8);
+            bandaMolt = 8;
+            PanelBandaMolt.BackColor = lstColoriBandaMolt[8];
+            AggiornaLabelRisultato();
+        }
+
+        // RadioButton MOLTIPLICATORE 9
+        private void RadioB_Molt_9_Click(object sender, EventArgs e)
+        {
+            RadioButtonSelezionato_Moltiplicatore(9);
+            bandaMolt = 9;
+            PanelBandaMolt.BackColor = lstColoriBandaMolt[9];
             AggiornaLabelRisultato();
         }
 
@@ -636,11 +698,11 @@ namespace ColoriResistenze
             }
         }
 
-        //************************************* Riempimento liste clori bande ******************************************
+        //************************************* Riempimento liste colori bande ******************************************
         //*************************************************************
-        // Riempimento della lista dei colori Bande 1-2-3
+        // Riempimento della lista dei colori BANDE 1-2-3
         //*************************************************************
-        private void RienpiListeColoriBande()
+        private void RienpiListeColoriBande_1_2_3()
         {
             // La seguente lista viene caricata normalmente, senza ciclicità,
             // perché i colori sono sempre gli stessi e non cambiano mai.
@@ -655,6 +717,25 @@ namespace ColoriResistenze
             lstColoriBande_1_2_3.Add(Color.Purple);  //7
             lstColoriBande_1_2_3.Add(Color.Gray);    //8
             lstColoriBande_1_2_3.Add(Color.White);   //9
+            lstColoriBande_1_2_3.Add(SystemColors.Control);   //10 Serve per banda NON utilizzata
+        }
+
+        //*************************************************************
+        // Riempimento della lista dei colori banda MOLTIPLICATORE
+        //*************************************************************
+        private void RienpiListaColoriMoltiplicatore()
+        {
+            lstColoriBandaMolt.Add(Color.Black);   //1
+            lstColoriBandaMolt.Add(Color.Brown);   //10
+            lstColoriBandaMolt.Add(Color.Red);     //100
+            lstColoriBandaMolt.Add(Color.Orange);  //1000
+            lstColoriBandaMolt.Add(Color.Yellow);  //10000
+            lstColoriBandaMolt.Add(Color.Green);   //100000
+            lstColoriBandaMolt.Add(Color.Blue);    //1000000
+            lstColoriBandaMolt.Add(Color.Purple);  //10000000
+            lstColoriBandaMolt.Add(Color.Gold);    //0.1
+            lstColoriBandaMolt.Add(Color.Silver);  //0.01
+            lstColoriBandaMolt.Add(SystemColors.Control);// Colore per non attivo
         }
 
         //*************************************************************
@@ -673,11 +754,70 @@ namespace ColoriResistenze
             lstColoriBandaToll.Add(Color.Gray);    //0.05%
             lstColoriBandaToll.Add(Color.Gold);    //5%
             lstColoriBandaToll.Add(Color.Silver);  //10%
+            lstColoriBandaToll.Add(SystemColors.Control);  //Colore per non attivo
         }
 
+        //***********************************************************
+        // Pulsante ESCI
+        //***********************************************************
+        private void Btn_Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //***********************************************************
+        // Pulsante ABOUT
+        //***********************************************************
         private void About_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Colori Resistenze v1.0\n\nBy: Claudio Zucca\nData: 28/10/2026", "Informazioni", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Colori Resistenze v1.0\n\nBy: Claudio Zucca 2026", "Informazioni", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        //***********************************************************
+        // Pulsante RESET
+        //***********************************************************
+        private void Btn_Reset_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        //***********************************************************
+        // RESET di tutti i valori e le selezioni dei RadioButton
+        //***********************************************************
+        public void Reset()
+        {
+            banda1Selezione = 10;
+            banda2Selezione = 10;
+            banda3Selezione = 10;
+            bandaMolt = 10.0f;
+            bandaTollSelezione = 8.0f;
+            // Inizializza i colori delle bande tutte allo Zero
+            PanelBanda1.BackColor = lstColoriBande_1_2_3[10];
+            PanelBanda2.BackColor = lstColoriBande_1_2_3[10];
+            PanelBanda3.BackColor = lstColoriBande_1_2_3[10];
+            PanelBandaMolt.BackColor = lstColoriBandaMolt[10];
+            PanelBandaToll.BackColor = lstColoriBandaToll[8];
+            Lbl_Valore.Text = intestazionelabel; //Inizializza la label del risultato
+            for (int i = 0; i < lstRb1Banda.Count; i++)
+            {
+                lstRb1Banda[i].Checked = false;
+            }
+            for (int i = 0; i < lstRb2Banda.Count; i++)
+            {
+                lstRb2Banda[i].Checked = false;
+            }
+            for (int i = 0; i < lstRb3Banda.Count; i++)
+            {
+                lstRb3Banda[i].Checked = false;
+            }
+            for (int i = 0; i < lstRbBandaMolt.Count; i++)
+            {
+                lstRbBandaMolt[i].Checked = false;
+            }
+            for (int i = 0; i < lstRbTolleranze.Count; i++)
+            {
+                lstRbTolleranze[i].Checked = false;
+            }
         }
 
         //**************************************************************************************************************
