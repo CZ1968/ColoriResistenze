@@ -31,10 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             Btn_Exit = new Button();
             pictureBox1 = new PictureBox();
-            Lbl_Valore = new Label();
-            RadioB1_0 = new RadioButton();
-            panel1 = new Panel();
-            label6 = new Label();
+            Lbl_Risultato = new Label();
             panel2 = new Panel();
             label7 = new Label();
             RadioB1_8 = new RadioButton();
@@ -190,7 +187,6 @@
             pictureBox2 = new PictureBox();
             Btn_Reset = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -258,61 +254,30 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(208, 12);
+            pictureBox1.Image = Properties.Resources.Resistenza1;
+            pictureBox1.Location = new Point(209, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(385, 133);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox1.Size = new Size(384, 133);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
-            // Lbl_Valore
+            // Lbl_Risultato
             // 
-            Lbl_Valore.AutoSize = true;
-            Lbl_Valore.Font = new Font("Segoe UI", 15F);
-            Lbl_Valore.Location = new Point(16, 155);
-            Lbl_Valore.Name = "Lbl_Valore";
-            Lbl_Valore.Size = new Size(71, 28);
-            Lbl_Valore.TabIndex = 12;
-            Lbl_Valore.Text = "Valore:";
-            // 
-            // RadioB1_0
-            // 
-            RadioB1_0.AutoSize = true;
-            RadioB1_0.Location = new Point(4, 6);
-            RadioB1_0.Name = "RadioB1_0";
-            RadioB1_0.Size = new Size(14, 13);
-            RadioB1_0.TabIndex = 13;
-            RadioB1_0.UseVisualStyleBackColor = true;
-            RadioB1_0.Click += RadioB1_0_Click;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.Black;
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(RadioB1_0);
-            panel1.Location = new Point(8, 25);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(111, 24);
-            panel1.TabIndex = 14;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Black;
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(24, 5);
-            label6.Name = "label6";
-            label6.Size = new Size(84, 15);
-            label6.TabIndex = 15;
-            label6.Text = "Nero               0";
+            Lbl_Risultato.AutoSize = true;
+            Lbl_Risultato.Font = new Font("Segoe UI", 15F);
+            Lbl_Risultato.Location = new Point(16, 155);
+            Lbl_Risultato.Name = "Lbl_Risultato";
+            Lbl_Risultato.Size = new Size(71, 28);
+            Lbl_Risultato.TabIndex = 12;
+            Lbl_Risultato.Text = "Valore:";
             // 
             // panel2
             // 
             panel2.BackColor = Color.Gray;
             panel2.Controls.Add(label7);
             panel2.Controls.Add(RadioB1_8);
-            panel2.Location = new Point(8, 265);
+            panel2.Location = new Point(8, 236);
             panel2.Name = "panel2";
             panel2.Size = new Size(111, 24);
             panel2.TabIndex = 16;
@@ -344,7 +309,7 @@
             panel3.BackColor = Color.Blue;
             panel3.Controls.Add(label8);
             panel3.Controls.Add(RadioB1_6);
-            panel3.Location = new Point(8, 205);
+            panel3.Location = new Point(8, 176);
             panel3.Name = "panel3";
             panel3.Size = new Size(111, 24);
             panel3.TabIndex = 16;
@@ -376,7 +341,7 @@
             panel4.BackColor = Color.Purple;
             panel4.Controls.Add(label9);
             panel4.Controls.Add(RadioB1_7);
-            panel4.Location = new Point(8, 235);
+            panel4.Location = new Point(8, 206);
             panel4.Name = "panel4";
             panel4.Size = new Size(111, 24);
             panel4.TabIndex = 16;
@@ -408,7 +373,7 @@
             panel5.BackColor = Color.Brown;
             panel5.Controls.Add(label10);
             panel5.Controls.Add(RadioB1_1);
-            panel5.Location = new Point(8, 55);
+            panel5.Location = new Point(8, 26);
             panel5.Name = "panel5";
             panel5.Size = new Size(111, 24);
             panel5.TabIndex = 16;
@@ -440,7 +405,7 @@
             panel6.BackColor = Color.Red;
             panel6.Controls.Add(label11);
             panel6.Controls.Add(RadioB1_2);
-            panel6.Location = new Point(8, 85);
+            panel6.Location = new Point(8, 56);
             panel6.Name = "panel6";
             panel6.Size = new Size(111, 24);
             panel6.TabIndex = 16;
@@ -472,7 +437,7 @@
             panel7.BackColor = Color.Orange;
             panel7.Controls.Add(label12);
             panel7.Controls.Add(RadioB1_3);
-            panel7.Location = new Point(8, 115);
+            panel7.Location = new Point(8, 86);
             panel7.Name = "panel7";
             panel7.Size = new Size(111, 24);
             panel7.TabIndex = 16;
@@ -504,7 +469,7 @@
             panel8.BackColor = Color.Yellow;
             panel8.Controls.Add(label13);
             panel8.Controls.Add(RadioB1_4);
-            panel8.Location = new Point(8, 145);
+            panel8.Location = new Point(8, 116);
             panel8.Name = "panel8";
             panel8.Size = new Size(111, 24);
             panel8.TabIndex = 16;
@@ -536,7 +501,7 @@
             panel9.BackColor = Color.White;
             panel9.Controls.Add(label14);
             panel9.Controls.Add(RadioB1_9);
-            panel9.Location = new Point(8, 295);
+            panel9.Location = new Point(8, 266);
             panel9.Name = "panel9";
             panel9.Size = new Size(111, 24);
             panel9.TabIndex = 16;
@@ -568,7 +533,7 @@
             panel10.BackColor = Color.Green;
             panel10.Controls.Add(label15);
             panel10.Controls.Add(RadioB1_5);
-            panel10.Location = new Point(8, 175);
+            panel10.Location = new Point(8, 146);
             panel10.Name = "panel10";
             panel10.Size = new Size(111, 24);
             panel10.TabIndex = 16;
@@ -607,7 +572,6 @@
             groupBox1Banda.Controls.Add(panel2);
             groupBox1Banda.Controls.Add(panel3);
             groupBox1Banda.Controls.Add(panel10);
-            groupBox1Banda.Controls.Add(panel1);
             groupBox1Banda.FlatStyle = FlatStyle.Flat;
             groupBox1Banda.Location = new Point(16, 199);
             groupBox1Banda.Name = "groupBox1Banda";
@@ -1578,7 +1542,7 @@
             // PanelBanda1
             // 
             PanelBanda1.ForeColor = SystemColors.ControlText;
-            PanelBanda1.Location = new Point(274, 59);
+            PanelBanda1.Location = new Point(269, 49);
             PanelBanda1.Name = "PanelBanda1";
             PanelBanda1.Size = new Size(22, 72);
             PanelBanda1.TabIndex = 21;
@@ -1586,23 +1550,23 @@
             // PanelBanda2
             // 
             PanelBanda2.ForeColor = SystemColors.ControlText;
-            PanelBanda2.Location = new Point(322, 69);
+            PanelBanda2.Location = new Point(314, 59);
             PanelBanda2.Name = "PanelBanda2";
-            PanelBanda2.Size = new Size(14, 52);
+            PanelBanda2.Size = new Size(15, 52);
             PanelBanda2.TabIndex = 22;
             // 
             // PanelBanda3
             // 
             PanelBanda3.ForeColor = SystemColors.ControlText;
-            PanelBanda3.Location = new Point(361, 69);
+            PanelBanda3.Location = new Point(354, 59);
             PanelBanda3.Name = "PanelBanda3";
-            PanelBanda3.Size = new Size(14, 52);
+            PanelBanda3.Size = new Size(15, 52);
             PanelBanda3.TabIndex = 23;
             // 
             // PanelBandaToll
             // 
             PanelBandaToll.ForeColor = SystemColors.ControlText;
-            PanelBandaToll.Location = new Point(520, 59);
+            PanelBandaToll.Location = new Point(514, 49);
             PanelBandaToll.Name = "PanelBandaToll";
             PanelBandaToll.Size = new Size(20, 72);
             PanelBandaToll.TabIndex = 24;
@@ -1961,17 +1925,17 @@
             // PanelBandaMolt
             // 
             PanelBandaMolt.ForeColor = SystemColors.ControlText;
-            PanelBandaMolt.Location = new Point(404, 69);
+            PanelBandaMolt.Location = new Point(397, 59);
             PanelBandaMolt.Name = "PanelBandaMolt";
-            PanelBandaMolt.Size = new Size(14, 52);
+            PanelBandaMolt.Size = new Size(15, 52);
             PanelBandaMolt.TabIndex = 27;
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.ZuccaLogo;
-            pictureBox2.Location = new Point(14, 27);
+            pictureBox2.Image = Properties.Resources.ZuccaLogo1;
+            pictureBox2.Location = new Point(16, 33);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(175, 99);
+            pictureBox2.Size = new Size(175, 91);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 28;
             pictureBox2.TabStop = false;
@@ -2003,7 +1967,7 @@
             Controls.Add(groupBoxToll);
             Controls.Add(groupBox4Banda);
             Controls.Add(groupBox2Banda);
-            Controls.Add(Lbl_Valore);
+            Controls.Add(Lbl_Risultato);
             Controls.Add(pictureBox1);
             Controls.Add(Btn_Exit);
             Controls.Add(groupBox1Banda);
@@ -2012,10 +1976,7 @@
             MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "   ";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
@@ -2124,10 +2085,7 @@
 
         private Button Btn_Exit;
         private PictureBox pictureBox1;
-        private Label Lbl_Valore;
-        private RadioButton RadioB1_0;
-        private Panel panel1;
-        private Label label6;
+        private Label Lbl_Risultato;
         private Panel panel2;
         private Label label7;
         private RadioButton RadioB1_8;
