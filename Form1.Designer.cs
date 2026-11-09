@@ -244,7 +244,7 @@
             // 
             // Btn_Exit
             // 
-            Btn_Exit.Location = new Point(605, 122);
+            Btn_Exit.Location = new Point(605, 48);
             Btn_Exit.Name = "Btn_Exit";
             Btn_Exit.Size = new Size(136, 23);
             Btn_Exit.TabIndex = 0;
@@ -575,7 +575,7 @@
             groupBox1Banda.FlatStyle = FlatStyle.Flat;
             groupBox1Banda.Location = new Point(16, 199);
             groupBox1Banda.Name = "groupBox1Banda";
-            groupBox1Banda.Size = new Size(131, 326);
+            groupBox1Banda.Size = new Size(131, 306);
             groupBox1Banda.TabIndex = 17;
             groupBox1Banda.TabStop = false;
             groupBox1Banda.Text = "1 BANDA";
@@ -934,10 +934,10 @@
             groupBox4Banda.Controls.Add(panel28);
             groupBox4Banda.Controls.Add(panel29);
             groupBox4Banda.Controls.Add(panel30);
-            groupBox4Banda.FlatStyle = FlatStyle.Flat;
+            groupBox4Banda.FlatStyle = FlatStyle.System;
             groupBox4Banda.Location = new Point(457, 200);
             groupBox4Banda.Name = "groupBox4Banda";
-            groupBox4Banda.Size = new Size(131, 324);
+            groupBox4Banda.Size = new Size(131, 318);
             groupBox4Banda.TabIndex = 19;
             groupBox4Banda.TabStop = false;
             groupBox4Banda.Text = "4 MOLTIPLICATORE";
@@ -947,7 +947,7 @@
             panel27.BackColor = Color.Silver;
             panel27.Controls.Add(RadioB_Molt_9);
             panel27.Controls.Add(label32);
-            panel27.Location = new Point(8, 294);
+            panel27.Location = new Point(8, 286);
             panel27.Name = "panel27";
             panel27.Size = new Size(111, 24);
             panel27.TabIndex = 18;
@@ -980,7 +980,7 @@
             panel22.BackColor = Color.Gold;
             panel22.Controls.Add(RadioB_Molt_8);
             panel22.Controls.Add(label27);
-            panel22.Location = new Point(8, 265);
+            panel22.Location = new Point(8, 257);
             panel22.Name = "panel22";
             panel22.Size = new Size(111, 24);
             panel22.TabIndex = 17;
@@ -1013,7 +1013,7 @@
             panel21.BackColor = Color.Yellow;
             panel21.Controls.Add(label26);
             panel21.Controls.Add(RadioB_Molt_4);
-            panel21.Location = new Point(8, 145);
+            panel21.Location = new Point(8, 141);
             panel21.Name = "panel21";
             panel21.Size = new Size(111, 24);
             panel21.TabIndex = 16;
@@ -1045,7 +1045,7 @@
             panel23.BackColor = Color.Orange;
             panel23.Controls.Add(label28);
             panel23.Controls.Add(RadioB_Molt_3);
-            panel23.Location = new Point(8, 115);
+            panel23.Location = new Point(8, 112);
             panel23.Name = "panel23";
             panel23.Size = new Size(111, 24);
             panel23.TabIndex = 16;
@@ -1077,7 +1077,7 @@
             panel24.BackColor = Color.Brown;
             panel24.Controls.Add(label29);
             panel24.Controls.Add(RadioB_Molt_1);
-            panel24.Location = new Point(8, 55);
+            panel24.Location = new Point(8, 54);
             panel24.Name = "panel24";
             panel24.Size = new Size(111, 24);
             panel24.TabIndex = 16;
@@ -1109,7 +1109,7 @@
             panel25.BackColor = Color.Red;
             panel25.Controls.Add(label30);
             panel25.Controls.Add(RadioB_Molt_2);
-            panel25.Location = new Point(8, 85);
+            panel25.Location = new Point(8, 83);
             panel25.Name = "panel25";
             panel25.Size = new Size(111, 24);
             panel25.TabIndex = 16;
@@ -1141,7 +1141,7 @@
             panel26.BackColor = Color.Purple;
             panel26.Controls.Add(label31);
             panel26.Controls.Add(RadioB_Molt_7);
-            panel26.Location = new Point(8, 235);
+            panel26.Location = new Point(8, 228);
             panel26.Name = "panel26";
             panel26.Size = new Size(111, 24);
             panel26.TabIndex = 16;
@@ -1173,7 +1173,7 @@
             panel28.BackColor = Color.Blue;
             panel28.Controls.Add(label33);
             panel28.Controls.Add(RadioB_Molt_6);
-            panel28.Location = new Point(8, 205);
+            panel28.Location = new Point(8, 199);
             panel28.Name = "panel28";
             panel28.Size = new Size(111, 24);
             panel28.TabIndex = 16;
@@ -1205,7 +1205,7 @@
             panel29.BackColor = Color.Green;
             panel29.Controls.Add(label34);
             panel29.Controls.Add(RadioB_Molt_5);
-            panel29.Location = new Point(8, 175);
+            panel29.Location = new Point(8, 170);
             panel29.Name = "panel29";
             panel29.Size = new Size(111, 24);
             panel29.TabIndex = 16;
@@ -1573,7 +1573,7 @@
             // 
             // About
             // 
-            About.Location = new Point(605, 485);
+            About.Location = new Point(605, 78);
             About.Name = "About";
             About.Size = new Size(136, 23);
             About.TabIndex = 25;
@@ -1942,7 +1942,7 @@
             // 
             // Btn_Reset
             // 
-            Btn_Reset.Location = new Point(605, 50);
+            Btn_Reset.Location = new Point(605, 18);
             Btn_Reset.Name = "Btn_Reset";
             Btn_Reset.Size = new Size(136, 23);
             Btn_Reset.TabIndex = 29;

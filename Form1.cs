@@ -35,16 +35,12 @@ namespace ColoriResistenze
         //Pragma warning disable per i messaggi del compilatore non necessari
 #pragma warning disable IDE0044 // Add readonly modifier
 #pragma warning disable IDE0028 // Use collection initializer
-
-        // private float flValoreResistenza = 0; // valore della resistenza calcolato
-
-        private List<float> lstColonna1 = new(); // liste dei valori
-        private List<float> lstColonna2 = new();
-        private List<float> lstColonna3 = new();
-        private List<float> lstMoltiplicatore = new();
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+#pragma warning disable IDE0079 // Unnecessary suppression
+#pragma warning disable CA1822  // Mark members as static
+#pragma warning disable CS0414  // The field 'Form1.strTitolo' is assigned but its value is never used
 
         private List<String> lstTolleranze = new();
-        //       private List<String> lstValoriImpostati = new();
 
         private List<Color> lstColoriBande_1_2_3 = new();
         private List<Color> lstColoriBandaMolt = new();
@@ -70,10 +66,10 @@ namespace ColoriResistenze
         private bool blBanda2Selezionata = false;
         private bool blBanda3Selezionata = false;
         private bool blBandaMoltSelezionata = false;
+
         private bool blBandaTollSelezionata = false;
 
         private string strIntestazionelabel = "Valore: "; // Intestazione della label del risultato
-
         private char chOhmSign = '\u2126'; // Simbolo Ohm
 
         // Inizio public
@@ -82,15 +78,16 @@ namespace ColoriResistenze
         public Form1()
         {
             InitializeComponent();
-            RiempiListe();                           // Riempie le liste con i valori
-            RienpiListeColoriBande_1_2_3();          // Riempie le liste con i colori
-            RienpiListaColoriMoltiplicatore();       // Riempie le liste con i colori del moltiplicatore
-            RienpiListeColoriToll();                 // Riempie le liste con i colori della tolleranza
+            RiempiLista_Toll();                      // Riempie la lista con i VALORI delle tolleranze
+            RienpiListeColoriBande_1_2_3();          // Riempie le liste con i COLORI per le bande 1-2-3
+            RienpiListaColoriMoltiplicatore();       // Riempie le liste con i COLORI del moltiplicatore
+            RienpiListeColoriToll();                 // Riempie le liste con i COLORI della tolleranza
 
             Lbl_Risultato.Text = strIntestazionelabel;  //Inizializza la label del risultato
             this.Text = strTitolo;                   // Imposta il titolo della finestra
 
-            // Inizializza i colori delle bande tutte al colore neutro (non selezionato)
+            // Inizializza i colori di tutte le bande al colore "neutro" (System.Control cioe' non selezionato)
+            // che sta all'indice n. 10
             PanelBanda1.BackColor = lstColoriBande_1_2_3[10];
             PanelBanda2.BackColor = lstColoriBande_1_2_3[10];
             PanelBanda3.BackColor = lstColoriBande_1_2_3[10];
@@ -132,49 +129,11 @@ namespace ColoriResistenze
         }
 
         //***********************************************************
-        // Riempimento delle liste con i valori
+        // Riempimento della liste Tolleranze con i valori
+        // Questa list e' dichiarata "List<string>"
         //***********************************************************
-        private void RiempiListe()
+        private void RiempiLista_Toll()
         {
-            // Prima Banda (notare che il primo indice ha valore 1 e non 0)
-            // Il primo elemento rimane ->0 come indice
-            lstColonna1.Add(1); // Elemento 0
-            lstColonna1.Add(2); // Elemento 1
-            lstColonna1.Add(3); // Elemento 2
-            lstColonna1.Add(4); // Elemento 3
-            lstColonna1.Add(5); // Elemento 4
-            lstColonna1.Add(6); // Elemento 5
-            lstColonna1.Add(7); // Elemento 6
-            lstColonna1.Add(8); // Elemento 7
-            lstColonna1.Add(9); // Elemento 8
-
-            //Seconda banda
-            lstColonna1.Add(0); // Elemento 0
-            lstColonna1.Add(1); // Elemento 1
-            lstColonna1.Add(2); // Elemento 2
-            lstColonna1.Add(3); // Elemento 3
-            lstColonna1.Add(4); // Elemento 4
-            lstColonna1.Add(5); // Elemento 5
-            lstColonna1.Add(6); // Elemento 6
-            lstColonna1.Add(7); // Elemento 7
-            lstColonna1.Add(8); // Elemento 8
-            lstColonna1.Add(9); // Elemento 9
-
-            //Terza banda uguale alla prima
-            lstColonna3.AddRange(lstColonna2);
-
-            //Quarta banda MOLTIPLICATORE
-            lstMoltiplicatore.Add(1);         // Elemento 0 x1 ---> 1ohm
-            lstMoltiplicatore.Add(10);        // Elemento 1 x10 ---> 10ohm
-            lstMoltiplicatore.Add(100);       // Elemento 2 x100 ---> 100ohm
-            lstMoltiplicatore.Add(1000);      // Elemento 3 x1000 ---> 1Kohm
-            lstMoltiplicatore.Add(10000);     // Elemento 4 x10000 ---> 10Kohm
-            lstMoltiplicatore.Add(100000);    // Elemento 5 x100000 ---> 100Kohm
-            lstMoltiplicatore.Add(1000000);   // Elemento 6 x1000000 ---> 1Mohm
-            lstMoltiplicatore.Add(10000000);  // Elemento 7 x10000000 ---> 10Mohm
-            lstMoltiplicatore.Add(0.1f);      // Elemento 8 x0.1  --------> 10% di 1ohm
-            lstMoltiplicatore.Add(0.01f);     // Elemento 9 x0.01 ---------> 1% di 1ohm
-
             //Quarta banda TOLLERANZA
             lstTolleranze.Add("+/- 1%");      // Elemento 0
             lstTolleranze.Add("+/- 2%");      // Elemento 1
@@ -187,14 +146,18 @@ namespace ColoriResistenze
         }
 
         //***********************************************************
-        // aggiorna la label del risultato in tempo reale
+        // Calcolo e aggiornamento della label del risultato in tempo
+        // reale
         //***********************************************************
         private void AggiornaLabelRisultato()
         {
+            string strRisultatoAbbreviato = "";
+            double dRisultato;
+            // string strRisultatoAbbreviato;
             if (!blBanda1Selezionata || !blBandaMoltSelezionata)
             {
                 Lbl_Risultato.ForeColor = Color.Red;
-                Lbl_Risultato.Text = $"{strIntestazionelabel} La banda n.1 e il moltiplicatore DEVONO essere selezionati.";
+                Lbl_Risultato.Text = $"{strIntestazionelabel} La banda n.1-2 e il moltiplicatore DEVONO essere selezionati.";
             }
             else if (blBanda1Selezionata && !blBanda3Selezionata && blBandaMoltSelezionata)
             {
@@ -204,26 +167,48 @@ namespace ColoriResistenze
                     Lbl_Risultato.Text = $"{strIntestazionelabel} Valore NON valido. La banda n.2 DEVE essere selezionata.";
                     return;
                 }
-                double dRisultato = ((dBanda1Selezione * 10) + dBanda2Selezione) * dBandaMolt;
+                dRisultato = ((dBanda1Selezione * 10) + dBanda2Selezione) * dBandaMolt;
+                strRisultatoAbbreviato = AbbreviazioneValore(dRisultato);
                 Lbl_Risultato.ForeColor = Color.Black;
-                Lbl_Risultato.Text = $"{strIntestazionelabel} {dRisultato:F2}{chOhmSign} Toll: {lstTolleranze[dBandaTollSelezione]}";
+                Lbl_Risultato.Text = $"{strIntestazionelabel} {dRisultato:F2}{chOhmSign} Toll.: {lstTolleranze
+                    [dBandaTollSelezione]} Abbreviato: {strRisultatoAbbreviato}{chOhmSign}";
             }
             else if (blBanda1Selezionata && blBanda3Selezionata && blBandaMoltSelezionata)
             {
-                double dRisultato = ((((dBanda1Selezione * 100) + (dBanda2Selezione * 10))) + dBanda3Selezione) * dBandaMolt;
+                dRisultato = ((((dBanda1Selezione * 100) + (dBanda2Selezione * 10))) + dBanda3Selezione) * dBandaMolt;
+                strRisultatoAbbreviato = AbbreviazioneValore(dRisultato);
                 Lbl_Risultato.ForeColor = Color.Black;
-                Lbl_Risultato.Text = $"{strIntestazionelabel} {dRisultato:F2}{chOhmSign} Toll: {lstTolleranze[dBandaTollSelezione]}";
+                Lbl_Risultato.Text = $"{strIntestazionelabel} {dRisultato:F2}{chOhmSign} Toll.: {lstTolleranze[dBandaTollSelezione]} Abbreviato: {strRisultatoAbbreviato}{chOhmSign}";
+            }
+        }
+
+        private string AbbreviazioneValore(double valore)
+        {
+            if (valore >= 1_000_000)
+            {
+                return $"{valore / 1_000_000:F2}M";
+            }
+            else if (valore >= 1_000)
+            {
+                return $"{valore / 1_000:F2}K";
+            }
+            else
+            {
+                return $"{valore:F2}";
             }
         }
 
         //**************************************************************************************************************
         //*****************************************************************************
-        // INIZIO gestione radio button alla selezione e assegnazione valore. BANDA 1
-        // Questa lista parte da "0" come RadioButton ma il suo valore e' "Marrone" quindi "1".
+        // INIZIO gestione radio button alla selezione e assegnazione valore.
+        //*****************************************************************************
+        // BANDA 1: questa lista parte da "0" come RadioButton ma il suo valore e' "Marrone" quindi "1".
         // L'indice della list pero' e' zero in quanto primo indice della List
         //*****************************************************************************
 
+        //***********************************************************
         // RadioButton 1
+        //***********************************************************
         private void RadioB1_1_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(0);
@@ -233,7 +218,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 2
+        //***********************************************************
         private void RadioB1_2_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(1);
@@ -243,7 +230,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 3
+        //***********************************************************
         private void RadioB1_3_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(2);
@@ -253,7 +242,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 4
+        //***********************************************************
         private void RadioB1_4_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(3);
@@ -263,7 +254,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 5
+        //***********************************************************
         private void RadioB1_5_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(4);
@@ -273,7 +266,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 6
+        //***********************************************************
         private void RadioB1_6_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(5);
@@ -283,7 +278,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 7
+        //***********************************************************
         private void RadioB1_7_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(6);
@@ -293,7 +290,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 8
+        //***********************************************************
         private void RadioB1_8_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_1_Banda(7);
@@ -303,10 +302,12 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 9
+        //***********************************************************
         private void RadioB1_9_Click(object sender, EventArgs e)
         {
-            RadioButtonSelezionato_1_Banda(9);
+            RadioButtonSelezionato_1_Banda(8);
             dBanda1Selezione = 9;
             PanelBanda1.BackColor = lstColoriBande_1_2_3[9];
             blBanda1Selezionata = true;
@@ -317,7 +318,9 @@ namespace ColoriResistenze
         // INIZIO gestione radio button alla selezione e assegnazione valore. BANDA 2
         //*****************************************************************************
 
+        //***********************************************************
         // RadioButton 0
+        //***********************************************************
         private void RadioB2_0_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(0);
@@ -327,7 +330,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 1
+        //***********************************************************
         private void RadioB2_1_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(1);
@@ -337,7 +342,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 2
+        //***********************************************************
         private void RadioB2_2_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(2);
@@ -347,7 +354,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 3
+        //***********************************************************
         private void RadioB2_3_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(3);
@@ -357,7 +366,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 4
+        //***********************************************************
         private void RadioB2_4_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(4);
@@ -367,7 +378,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 5
+        //***********************************************************
         private void RadioB2_5_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(5);
@@ -377,7 +390,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 6
+        //***********************************************************
         private void RadioB2_6_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(6);
@@ -387,7 +402,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 7
+        //***********************************************************
         private void RadioB2_7_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(7);
@@ -397,7 +414,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 8
+        //***********************************************************
         private void RadioB2_8_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(8);
@@ -407,7 +426,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 9
+        //***********************************************************
         private void RadioB2_9_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_2_Banda(9);
@@ -421,7 +442,9 @@ namespace ColoriResistenze
         // INIZIO gestione radio button alla selezione e assegnazione valore. COLONNA 3
         //*****************************************************************************
 
+        //***********************************************************
         // RadioButton 0
+        //***********************************************************
         private void RadioB3_0_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(0);
@@ -431,7 +454,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 1
+        //***********************************************************
         private void RadioB3_1_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(1);
@@ -441,7 +466,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 2
+        //***********************************************************
         private void RadioB3_2_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(2);
@@ -451,7 +478,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 3
+        //***********************************************************
         private void RadioB3_3_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(3);
@@ -461,7 +490,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 4
+        //***********************************************************
         private void RadioB3_4_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(4);
@@ -471,7 +502,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 5
+        //***********************************************************
         private void RadioB3_5_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(5);
@@ -481,7 +514,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 6
+        //***********************************************************
         private void RadioB3_6_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(6);
@@ -491,7 +526,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 7
+        //***********************************************************
         private void RadioB3_7_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(7);
@@ -501,7 +538,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 8
+        //***********************************************************
         private void RadioB3_8_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(8);
@@ -511,7 +550,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 9
+        //***********************************************************
         private void RadioB3_9_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_3_Banda(9);
@@ -525,7 +566,9 @@ namespace ColoriResistenze
         // INIZIO gestione radio button alla selezione e assegnazione valore MOLTIPLICATORE
         //*********************************************************************************
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 0
+        //***********************************************************
         private void RadioB_Molt_0_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(0);
@@ -535,7 +578,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 1
+        //***********************************************************
         private void RadioB_Molt_1_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(1);
@@ -545,7 +590,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 2
+        //***********************************************************
         private void RadioB_Molt_2_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(2);
@@ -555,7 +602,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 3
+        //***********************************************************
         private void RadioB_Molt_3_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(3);
@@ -565,7 +614,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 4
+        //***********************************************************
         private void RadioB_Molt_4_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(4);
@@ -575,7 +626,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 5
+        //***********************************************************
         private void RadioB_Molt_5_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(5);
@@ -585,7 +638,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 6
+        //***********************************************************
         private void RadioB_Molt_6_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(6);
@@ -595,7 +650,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 7
+        //***********************************************************
         private void RadioB_Molt_7_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(7);
@@ -605,7 +662,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 8
+        //***********************************************************
         private void RadioB_Molt_8_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(8);
@@ -615,7 +674,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton MOLTIPLICATORE 9
+        //***********************************************************
         private void RadioB_Molt_9_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Moltiplicatore(9);
@@ -629,7 +690,9 @@ namespace ColoriResistenze
         // INIZIO gestione radio button alla selezione e assegnazione valore. TOLLERANZA
         //******************************************************************************
 
+        //***********************************************************
         // RadioButton 0
+        //***********************************************************
         private void RadioB_Toll_0_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(0);
@@ -639,7 +702,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 1
+        //***********************************************************
         private void RadioB_Toll_1_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(1);
@@ -649,7 +714,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 2
+        //***********************************************************
         private void RadioB_Toll_2_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(2);
@@ -659,7 +726,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 3
+        //***********************************************************
         private void RadioB_Toll_3_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(3);
@@ -669,7 +738,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 4
+        //***********************************************************
         private void RadioB_Toll_4_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(4);
@@ -679,7 +750,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 5
+        //***********************************************************
         private void RadioB_Toll_5_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(5);
@@ -689,7 +762,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 6
+        //***********************************************************
         private void RadioB_Toll_6_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(6);
@@ -699,7 +774,9 @@ namespace ColoriResistenze
             AggiornaLabelRisultato();
         }
 
+        //***********************************************************
         // RadioButton 7
+        //***********************************************************
         private void RadioB_Toll_7_Click(object sender, EventArgs e)
         {
             RadioButtonSelezionato_Tolleranza(7);
@@ -809,6 +886,7 @@ namespace ColoriResistenze
             // La seguente lista viene caricata normalmente, senza ciclicità,
             // perché i colori sono sempre gli stessi e non cambiano mai.
             // I colori sono associati alle bande 1-2-3.
+            // La prima banda inizia con Marrone che ha valore 1.
             lstColoriBande_1_2_3.Add(Color.Black);   //0
             lstColoriBande_1_2_3.Add(Color.Brown);   //1
             lstColoriBande_1_2_3.Add(Color.Red);     //2
@@ -907,6 +985,7 @@ namespace ColoriResistenze
             PanelBandaToll.BackColor = lstColoriBandaToll[8];
             Lbl_Risultato.ForeColor = Color.Black;
             Lbl_Risultato.Text = strIntestazionelabel; //Inizializza la label del risultato
+
             for (int i = 0; i < lstRb1Banda.Count; i++)
             {
                 lstRb1Banda[i].Checked = false;
@@ -927,6 +1006,7 @@ namespace ColoriResistenze
             {
                 lstRbTolleranze[i].Checked = false;
             }
+            lstRbTolleranze[0].Checked = true;
         }
 
         //**************************************************************************************************************
