@@ -66,7 +66,6 @@ namespace ColoriResistenze
         private bool blBanda2Selezionata = false;
         private bool blBanda3Selezionata = false;
         private bool blBandaMoltSelezionata = false;
-
         private bool blBandaTollSelezionata = false;
 
         private string strIntestazionelabel = "Valore: "; // Intestazione della label del risultato
